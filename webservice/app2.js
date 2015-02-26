@@ -13,10 +13,10 @@ app.use(function(req, res, next) {
 
 var mysql      = require('mysql2');
 var connection = mysql.createConnection({
-  user: 'leonardo',
-  database: 'mysql',
-  host: '200.141.74.163',
-  password: 'tjlyn11'
+  user: '',
+  database: '',
+  host: '',
+  password: ''
 });
 
 // Navegadores mais utilizados

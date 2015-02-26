@@ -13,10 +13,10 @@ app.use(function(req, res, next) {
 
 var mysql      = require('mysql2');
 var connection = mysql.createConnection({
-  user: 'leonardo',
-  database: 'acessoportal',
-  host: '192.168.0.22',
-  password: 'leonardo'
+  user: '',
+  database: '',
+  host: '',
+  password: ''
 });
 
 app.get('/', function (req, res) {
