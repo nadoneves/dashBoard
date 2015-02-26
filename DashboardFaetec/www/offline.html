@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+<head>
+    <title>DashBoard Intranet.Faetec</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+<!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's screen.
+  * Note that the meta viewport approach is being phased out in favor of the @viewport CSS rule.
+  * For a quick overview of both, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see what happens, try the app on a real device with and without a "meta viewport" tag.
+-->
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+    <style>
+    /* following three (cascaded) are equivalent to above three meta viewport statements */
+    /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+    /* see http://dev.w3.org/csswg/css-device-adapt/ */
+        @-ms-viewport { width: 100vw ; zoom: 100% ; }                           @viewport { width: 100vw ; zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; }                                    @viewport { user-zoom: fixed ; }
+        /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+    </style>
+
+    <!--<link rel="stylesheet" href="css/app.css">-->
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<div class="container-fluid">
+    <div class="col-md-12">
+
+        <div calss="row">
+
+            <div class="col-md-4"></div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <center><span class="glyphicon glyphicon-signal" aria-hidden="true" style="font-size: 10em; color: red;"></span></center>
+                    </div>
+                    <div class="panel-footer">
+                        <center>
+                            Nenhuma conexão disponível, por favor conecte seu aparelho
+                            a uma rede com internet.
+                            <br><br>
+                            <button name="try" id="try" class="btn btn-success">Tentar Novamente</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li>
+                <p>
+                    2015 © developed by <a href="http://br.linkedin.com/in/nadoneves/">Leonardo Neves</a>
+                </p>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script charset="utf-8">
+    $(function(){        
+        $('#try').click(function(){
+            document.location = "index.html";          
+        });
+    });
+</script>
+    
+    </body>
+</html>

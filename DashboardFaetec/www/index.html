@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+<head>
+    <title>DashBoard Intranet.Faetec</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+<!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's screen.
+  * Note that the meta viewport approach is being phased out in favor of the @viewport CSS rule.
+  * For a quick overview of both, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see what happens, try the app on a real device with and without a "meta viewport" tag.
+-->
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+    <style>
+    /* following three (cascaded) are equivalent to above three meta viewport statements */
+    /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+    /* see http://dev.w3.org/csswg/css-device-adapt/ */
+        @-ms-viewport { width: 100vw ; zoom: 100% ; }                           @viewport { width: 100vw ; zoom: 100% ; }
+        @-ms-viewport { user-zoom: fixed ; }                                    @viewport { user-zoom: fixed ; }
+        /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+    </style>
+
+    <link rel="stylesheet" href="css/app.css">
+    <!-- Bootstrap CSS -->
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IMPORTANT: Do not include your weinre script tag as part of your release builds! -->
+    <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+    <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+    <!-- Most third-party libraries should go here. References (below) are just examples to give you the general idea... -->
+    <!-- <script src="lib/mc/hammer.js"></script> -->
+    <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+    <script src="intelxdk.js"></script>         <!-- phantom library, needed for Intel XDK "legacy" container api calls -->
+    <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls -->
+    
+    <script src="xhr.js"></script>              <!-- phantom library, needed for Intel XDK "legacy" container CORS -->
+
+    <script src="js/app.js"></script>           <!-- for your event code, see README and file comments for details -->
+    <script src="js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
+    <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see file for details -->
+</head>
+
+
+<body>
+    
+    <nav class="navbar navbar-default" role="navigation">
+           <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse"
+                 data-target="#example-navbar-collapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Intranet.faetec.rj.gov.br<span id="ismobile"></span></a>
+           </div>
+           <div class="collapse navbar-collapse" id="example-navbar-collapse">
+              <ul class="nav navbar-nav">
+                 <li class="active"><a href="index.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> DashBoard</a></li>
+				<li><a href="mysql.html"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span> MySql</a></li>
+                 <li><a href="about.html"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+              </ul>
+           </div>
+        </nav>
+
+    <div class="container-fluid">
+			<div class="col-md-12">
+
+                <div id="info" class="alert alert-info hide" role="alert" style="position: fixed; z-index: 10;">Loading Charts ...</div>
+
+				<div class="row"><!-- Row filter -->
+					<div class="panel panel-default">
+						<div class="panel-body">
+								<div class="col-md-4">
+									<div class="form-group">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+													<input type="date" class="form-control" id="dataIni" placeholder="Data Inicial">
+												</div>
+											</div>
+									</div>
+
+									<div class="col-md-4">
+											<div class="form-group">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+													<input type="date" class="form-control" id="dataFim" placeholder="Data Final">
+												</div>
+											</div>
+									</div>
+
+									<div class="col-md-4">
+											<button type="button" class="btn btn-primary" id="send">Send filter</button>
+									</div>
+								</div>
+					</div>
+				</div><!-- End Row Filter -->
+
+
+				<div class="row"><!-- Row pie charts -->
+                    <div class="col-md-12">
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="panel-title" id="accessTitle"></h3>
+							</div>
+							<div class="panel-body">
+								<div id="access" style="width:100%;height:300px"></div>
+							</div>
+							<div id="accessFooter" class="panel-footer">
+
+							</div>
+						</div>
+					</div>                    
+                    
+					<div class="col-md-6">
+						<div class="panel panel-success">
+							  <div class="panel-heading">
+									<h3 class="panel-title">All Systems</h3>
+							  </div>
+							  <div class="panel-body">
+									<div id="pieAllSystems" style="height: 300px; width: 100%;"></div>
+							  </div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-success">
+								<div class="panel-heading">
+									<h3 class="panel-title">Browser</h3>
+								</div>
+								<div class="panel-body">
+									<div id="pieBrowsers" style="height: 300px; width: 100%;"></div>
+								</div>
+						</div>
+					</div>
+				</div><!-- End Row pie charts -->
+
+				<div id="rowCharts" class="row"></div>
+
+			</div>
+		</div>
+
+				<div class="row">
+					<div class="container-fluid">
+						<ol class="breadcrumb">
+							<li>
+								<p>
+									2015 © developed by <a href="http://br.linkedin.com/in/nadoneves/">Leonardo Neves</a>
+								</p>
+							</li>
+						</ol>
+					</div>
+				</div>
+
+    <!-- IMPORTANT: Do not include your weinre script tag as part of your release builds! -->
+    <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
+    <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+    
+    <!-- jQuery -->
+	<script src="assets/jquery.js"></script>
+	<!-- Bootstrap JavaScript -->
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="assets/canvasjs.min.js"></script>
+    <script type="text/javascript" src="charts/pieBrowsers.js"></script>
+    <script type="text/javascript" src="charts/pieAllSystems.js"></script>
+    <script type="text/javascript" src="charts/access.js"></script>
+    
+    <script charset="utf-8">        
+        var Hoje = new Date();
+        var dataIniAtual = Hoje.getFullYear() + '-' + (Hoje.getMonth() + 1) + '-01';
+        var dataFimAtual = Hoje.getFullYear() + '-' + (Hoje.getMonth() + 1) + '-' + Hoje.getDate();
+        
+        var dataIni = dataIniAtual;
+        var dataFim = dataFimAtual;
+
+        pieBrowsers(dataIni, dataFim);
+        pieAllSystems(dataIni, dataFim);
+
+        $(function(){
+            $('#send').click(function(){
+                if($('#dataIni').val() == "")
+                    dataIni = dataIniAtual;
+                else
+                    dataIni = $('#dataIni').val();
+                    
+                
+                if($('#dataFim').val() == "")
+                    dataFim = dataFimAtual;
+                else
+                    dataFim = $('#dataFim').val();
+
+                $('#rowCharts div.col-md-6').remove();
+                pieBrowsers(dataIni, dataFim);
+                pieAllSystems(dataIni, dataFim);
+
+            });
+        });
+    </script>    
+</body>
+</html>

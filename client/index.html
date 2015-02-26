@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<title>DashBoardFaetec</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Title Page</title>
+
+		<!-- Bootstrap CSS -->
+		<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+        <nav class="navbar navbar-default" role="navigation">
+           <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse"
+                 data-target="#example-navbar-collapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Intranet.faetec.rj.gov.br<span id="ismobile"></span></a>
+           </div>
+           <div class="collapse navbar-collapse" id="example-navbar-collapse">
+              <ul class="nav navbar-nav">
+                 <li class="active"><a href="index.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> DashBoard</a></li>
+				 <li><a href="mysql.html"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span> MySql</a></li>
+                 <li><a href="about.html"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+				 <li><a href="http://intranet.faetec.rj.gov.br/dashPortal/apk/DashboardFaetec.apk"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Install Apk</a></li>
+              </ul>
+           </div>
+        </nav>
+
+    <div class="container-fluid">
+			<div class="col-md-12">
+
+                <div id="info" class="alert alert-info hide" role="alert" style="position: fixed; z-index: 10;">Loading Charts ...</div>
+
+				<div class="row"><!-- Row filter -->
+					<div class="panel panel-default">
+						<div class="panel-body">
+								<div class="col-md-4">
+									<div class="form-group">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+													<input type="date" class="form-control" id="dataIni" placeholder="Data Inicial">
+												</div>
+											</div>
+									</div>
+
+									<div class="col-md-4">
+											<div class="form-group">
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+													<input type="date" class="form-control" id="dataFim" placeholder="Data Final">
+												</div>
+											</div>
+									</div>
+
+									<div class="col-md-4">
+											<button type="button" class="btn btn-primary" id="send">Send invitation</button>
+									</div>
+								</div>
+					</div>
+				</div><!-- End Row Filter -->
+
+
+				<div class="row"><!-- Row pie charts -->
+
+					<div class="col-md-12">
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="panel-title" id="accessTitle"></h3>
+							</div>
+							<div class="panel-body">
+								<div id="access" style="width:100%;height:300px"></div>
+							</div>
+							<div id="accessFooter" class="panel-footer">
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="col-md-6">
+						<div class="panel panel-success">
+							  <div class="panel-heading">
+									<h3 class="panel-title">All Systems</h3>
+							  </div>
+							  <div class="panel-body">
+									<div id="pieAllSystems" style="height: 300px; width: 100%;"></div>
+							  </div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-success">
+								<div class="panel-heading">
+									<h3 class="panel-title">Browser</h3>
+								</div>
+								<div class="panel-body">
+									<div id="pieBrowsers" style="height: 300px; width: 100%;"></div>
+								</div>
+						</div>
+					</div>
+				</div><!-- End Row pie charts -->
+
+				<div id="rowCharts" class="row"></div>
+
+			</div>
+		</div>
+
+				<div class="row">
+					<div class="container-fluid">
+						<ol class="breadcrumb">
+							<li>
+								<p>
+									2015 © developed by <a href="http://br.linkedin.com/in/nadoneves/">Leonardo Neves</a>
+								</p>
+							</li>
+						</ol>
+					</div>
+				</div>
+
+		<!-- jQuery -->
+		<script src="assets/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="assets/canvasjs.min.js"></script>
+        <script type="text/javascript" src="charts/pieBrowsers.js"></script>
+		<script type="text/javascript" src="charts/pieAllSystems.js"></script>
+
+		<!--<script type="text/javascript" src="assets/flot/jquery.flot.js"></script>
+		<script type="text/javascript" src="charts/flot.js"></script>-->
+
+		<script type="text/javascript" src="charts/access.js"></script>
+		<script charset="utf-8">
+			var Hoje = new Date();
+			var dataIniAtual = Hoje.getFullYear() + '-' + (Hoje.getMonth() + 1) + '-1';
+			var dataFimAtual = Hoje.getFullYear() + '-' + (Hoje.getMonth() + 1) + '-' + Hoje.getDate();
+
+			var dataIni = dataIniAtual;
+			var dataFim = dataFimAtual;
+
+			$('#accessTitle').html("Access " + dataIni + " to " + dataFim);
+
+			pieBrowsers(dataIni, dataFim);
+			pieAllSystems(dataIni, dataFim);
+
+			$(function(){
+					$('#send').click(function(){
+							if($('#dataIni').val() == "")
+									dataIni = dataIniAtual;
+							else
+									dataIni = $('#dataIni').val();
+
+
+							if($('#dataFim').val() == "")
+									dataFim = dataFimAtual;
+							else
+									dataFim = $('#dataFim').val();
+
+							$('#rowCharts div.col-md-6').remove();
+							pieBrowsers(dataIni, dataFim);
+							pieAllSystems(dataIni, dataFim);
+
+					});
+			});
+		</script>
+
+	</body>
+</html>

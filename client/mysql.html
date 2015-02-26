@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="">
+	<head>
+		<title>DashBoardFaetec</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Title Page</title>
+
+		<!-- Bootstrap CSS -->
+		<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+        <nav class="navbar navbar-default" role="navigation">
+           <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse"
+                 data-target="#example-navbar-collapse">
+                 <span class="sr-only">Toggle navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Intranet.faetec.rj.gov.br<span id="ismobile"></span></a>
+           </div>
+           <div class="collapse navbar-collapse" id="example-navbar-collapse">
+              <ul class="nav navbar-nav">
+                 <li><a href="index.html"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> DashBoard</a></li>
+				 <li class="active"><a href="mysql.html"><span class="glyphicon glyphicon-hdd" aria-hidden="true"></span> MySql</a></li>
+                 <li><a href="about.html"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+				<li><a href="http://intranet.faetec.rj.gov.br/dashPortal/apk/DashboardFaetec.apk"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Install Apk</a></li>
+              </ul>
+           </div>
+        </nav>
+
+    <div class="container-fluid">
+
+		<div class="col-md-12">
+
+            <div id="info" class="alert alert-info hide" role="alert" style="position: fixed; z-index: 10;">Loading Charts ...</div>
+
+
+			<div class="row"><!-- Row pie charts -->
+				<div class="col-md-12">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h3 class="panel-title" id="mysqlTitle">Activity Process Mysql</h3>
+						</div>
+						<div class="panel-body">
+							<div id="mysql" style="width:100%;height:300px"></div>
+						</div>
+						<div id="mysqlFooter" class="panel-footer">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+				<div class="row">
+
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="col-md-6">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+											<span class="label label-info" id="labelSleep">4</span>
+											Sleep Process
+										</a>
+									</h3>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<table class="table table-striped" id="tableSleep">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>User</th>
+													<th>db</th>
+												</tr>
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseOne">
+											<span class="label label-success" id="labelQuery">4</span>
+											Query
+										</a>
+									</h3>
+								</div>
+								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+									<div class="panel-body">
+										<table class="table table-striped" id="tableQuery">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>User</th>
+													<th>db</th>
+													<th>Query</th>
+												</tr>
+											</thead>
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+		</div>
+
+	</div><!-- end container fluid -->
+
+	<br>
+	<div class="row">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li>
+					<p>
+						2015 © developed by <a href="http://br.linkedin.com/in/nadoneves/">Leonardo Neves</a>
+					</p>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+
+		<!-- jQuery -->
+		<script src="assets/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="assets/canvasjs.min.js"></script>
+
+		<script type="text/javascript" src="assets/flot/jquery.flot.js"></script>
+		<script type="text/javascript" src="charts/mysql.js"></script>
+
+
+
+	</body>
+</html>

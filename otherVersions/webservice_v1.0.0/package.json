@@ -1,0 +1,15 @@
+{
+  "name": "webservice",
+  "version": "1.0.0",
+  "description": "Webservice mysql dashboard",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leonardo Neves",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.11.1",
+    "mysql2": "^0.15.0"
+  }
+}
